@@ -1,28 +1,38 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import GalleryItem from '../GalleryItem/GalleryItem';
-// import s from './Gallery.scss';
+import s from './Gallery.scss';
 
 class Gallery extends Component {
 
-    constructor(props) {
-        super(props);
-        // Manually bind this method to the component instance...
-        this.renderItems = this.renderItems.bind(this);
-    }
+  constructor(props) {
+    super(props);
+    // Manually bind this method to the component instance...
+    this.renderItems = this.renderItems.bind(this);
+  }
 
-    render() {
-        return (
-            <div className="row">
-                {this.renderItems()}
-            </div>
-        );
-    }
+  componentDidMount() {
+    let links = document.getElementsByClassName('gallery');
+    $('.gallery').unbind('click').bind('click', event => {
+      blueimp.Gallery(links, {
+        index: event.currentTarget,
+        event: event
+      });
+    });
+  }
 
-    renderItems() {
-        return this.props.items.map(function(item) {
-            return <GalleryItem key={item.id} {...item}/>;
-        });
-    }
+  render() {
+    return (
+      <div className="row">
+        {this.renderItems()}
+      </div>
+    );
+  }
+
+  renderItems() {
+    return this.props.items.map(function(item){
+      return <GalleryItem key={item.id} {...item} />;
+    });
+  }
 
 };
 
