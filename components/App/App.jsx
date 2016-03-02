@@ -1,10 +1,11 @@
 import React, {Component} from 'react';
 import s from './App.scss';
+import Gallery from '../Gallery/Gallery';
 
 class App extends Component {
 
     render() {
-        return <h1>Hello, World!</h1>;
+        return <Gallery items={this.props.galleryItems}></Gallery>
     }
 
 }
